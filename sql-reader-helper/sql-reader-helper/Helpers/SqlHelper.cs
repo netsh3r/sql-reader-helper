@@ -1,4 +1,5 @@
-﻿using SqlHelper.Interfaces;
+﻿using sql_reader_helper.Reader;
+using SqlHelper.Interfaces;
 using SqlHelper.Reader;
 using System;
 using System.Collections.Generic;
