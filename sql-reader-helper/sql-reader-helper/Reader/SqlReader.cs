@@ -1,49 +1,76 @@
-﻿using SqlHelper.Reader;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Common;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace SqlHelper
+namespace SqlHelperReader.Reader
 {
-	public class SqlReader<T> : SqlHelperReader
+	public class SqlReader : SqlReaderBase
 	{
 		/// <summary>
-		/// Конструктор для сохранения свойства dataReader
+		/// конструктор для хранения переменной dataReader
 		/// </summary>
 		/// <param name="DataReader"></param>
 		public SqlReader(DbDataReader DataReader) : base(DataReader)
 		{
 		}
+		
+		public SqlReader(DbDataReader DataReader,string ColumnName) : base(DataReader,ColumnName)
+		{
+		}
 
 		/// <summary>
-		/// Полученное значение
+		/// Считать свойство
 		/// </summary>
-		public T Value
+		/// <typeparam name="T">тип</typeparam>
+		/// <param name="fieldName">название колонки</param>
+		/// <returns>объект выбранного типа</returns>
+		public T Reader<T>(string fieldName)
 		{
-			get
+			return Read<T>(fieldName);
+		}
+		/// <summary>
+		/// Изменить свойство в зависимости от полученного объекта
+		/// </summary>
+		/// <param name="newData"></param>
+		/// <returns></returns>
+		internal SqlReader SetData(object newData)
+		{
+			base.Data = newData;
+			return this;
+		}
+
+		public override T Read<T>(string FieldName)
+		{
+			int FieldIndex;
+			try { FieldIndex = DataReader.GetOrdinal(FieldName); }
+			catch { return default(T); }
+
+			if (DataReader.IsDBNull(FieldIndex))
 			{
-				return (T)base.Data;
+				return default(T);
 			}
-		}
-		/// <summary>
-		/// считать запись в зависимости от результата
-		/// </summary>
-		/// <param name="FieldName"></param>
-		/// <returns></returns>
-		public SqlReader<T> Read(string FieldName)
-		{
-			base.Data = base.Read<T>(FieldName);
-			return this;
-		}
-		/// <summary>
-		/// Выполнить логику чтения данных
-		/// </summary>
-		/// <param name="action"></param>
-		/// <returns></returns>
-		public SqlReader<T> Action(Action<SqlReader<T>> action)
-		{
-			//new SqlReader<T>(base.DataReader)
-			action(this);
-			return this;
+			else
+			{
+				object readData = DataReader.GetValue(FieldIndex);
+				if (readData is T)
+				{
+					return (T)readData;
+				}
+				else
+				{
+					try
+					{
+						return (T)Convert.ChangeType(readData, typeof(T));
+					}
+					catch (InvalidCastException)
+					{
+						return default(T);
+					}
+				}
+			}
 		}
 	}
 }

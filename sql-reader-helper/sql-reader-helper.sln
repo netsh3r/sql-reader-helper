@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sql-reader-helper", "sql-reader-helper\sql-reader-helper.csproj", "{8CB15373-84A7-4C5B-9E0F-D0939CFB6553}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sql-helper-reader.Test", "sql-helper-reader.Test\sql-helper-reader.Test.csproj", "{49B4B8DF-20CD-41E5-8D05-04E81F1CF62C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sql-reader-helper.test", "sql-reader-helper.test\sql-reader-helper.test.csproj", "{4EB31E5F-6C7B-4E3A-B146-0E8309944290}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{8CB15373-84A7-4C5B-9E0F-D0939CFB6553}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CB15373-84A7-4C5B-9E0F-D0939CFB6553}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CB15373-84A7-4C5B-9E0F-D0939CFB6553}.Release|Any CPU.Build.0 = Release|Any CPU
-		{49B4B8DF-20CD-41E5-8D05-04E81F1CF62C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{49B4B8DF-20CD-41E5-8D05-04E81F1CF62C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{49B4B8DF-20CD-41E5-8D05-04E81F1CF62C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{49B4B8DF-20CD-41E5-8D05-04E81F1CF62C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EB31E5F-6C7B-4E3A-B146-0E8309944290}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EB31E5F-6C7B-4E3A-B146-0E8309944290}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EB31E5F-6C7B-4E3A-B146-0E8309944290}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EB31E5F-6C7B-4E3A-B146-0E8309944290}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

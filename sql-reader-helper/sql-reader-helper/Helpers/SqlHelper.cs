@@ -1,6 +1,4 @@
-﻿using sql_reader_helper.Reader;
-using SqlHelper.Interfaces;
-using SqlHelper.Reader;
+﻿using SqlHelperReader.Reader;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -8,51 +6,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SqlHelper
+namespace SqlHelperReader
 {
-	/// <summary>
-	/// Помощник
-	/// </summary>
-	public class SqlHelper : ISqlHelper
+	public class SqlHelper : SqlHelperBase
 	{
-		private static DbDataReader _dataReader;
-		/// <summary>
-		/// Получить класс хелпер
-		/// </summary>
-		/// <param name="DataReader"></param>
-		/// <returns></returns>
-		public static SqlHelper Create(DbDataReader DataReader)
+		private SqlReader sqlReader;
+		public SqlHelper(DbDataReader dbReader) : base(dbReader) 
 		{
-			_dataReader = DataReader;
-			return new SqlHelper();
+			this.sqlReader = new SqlReader(dbReader);
 		}
 
-		/// <summary>
-		/// Получть класс для чтения результата
-		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <returns></returns>
-		public SqlReader<T> Read<T>()
+		private string Read(string columnName)
 		{
-			return new SqlReader<T>(_dataReader);
+			sqlReader.Read
+			return null;
 		}
-		/// <summary>
-		/// получить результат в зависимости от типа
-		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <param name="FieldName"></param>
-		/// <returns></returns>
-		public T Read<T>(string FieldName)
+
+		private T Read<T>(string columnName)
 		{
-			try
-			{
-				var helper = new SqlHelperReader(_dataReader);
-				return helper.Reader<T>(FieldName);
-			}
-			catch (Exception e)
-			{
-				return default(T);
-			}
+			return default(T);
 		}
 	}
 }

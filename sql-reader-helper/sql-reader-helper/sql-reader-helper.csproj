@@ -41,18 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\SqlHelper.cs" />
+    <Compile Include="Helpers\SqlHelperBase.cs" />
     <Compile Include="Helpers\TypeExtension.cs" />
     <Compile Include="Helpers\SqlHelper.Generic.cs" />
     <Compile Include="Interfaces\ISqlHelper.cs" />
     <Compile Include="Interfaces\ISqlHelperReader.cs" />
     <Compile Include="Interfaces\ISqlHelperReaderBase.cs" />
     <Compile Include="Interfaces\ISqlReader.cs" />
-    <Compile Include="Reader\SqlReader.Generic.cs" />
+    <Compile Include="Reader\SqlReader.Generic.Property.cs" />
     <Compile Include="Helpers\SqhHelperReaderBase.cs" />
-    <Compile Include="Helpers\SqlHelper.cs" />
+    <Compile Include="Helpers\SqlHelper.Action.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reader\SqlHelperReader.cs" />
     <Compile Include="Reader\SqlReader.cs" />
+    <Compile Include="Reader\SqlReader.Generic.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

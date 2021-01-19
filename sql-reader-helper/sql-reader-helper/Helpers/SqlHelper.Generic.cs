@@ -1,4 +1,4 @@
-﻿using sql_reader_helper.Reader;
+﻿using SqlHelperReader.Reader;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sql_reader_helper.Helpers
+namespace SqlHelperReader.Helpers
 {
 	public sealed class SqlHelper<T> : IDisposable where T: new() 
 	{

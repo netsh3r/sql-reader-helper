@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SqlHelper.Interfaces
+namespace SqlHelperReader.Interfaces
 {
 	/// <summary>
 	/// Базовый класс для чтения данных sql

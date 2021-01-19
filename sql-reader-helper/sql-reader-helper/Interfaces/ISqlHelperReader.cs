@@ -1,11 +1,11 @@
-﻿using SqlHelper.Reader;
+﻿using SqlHelperReader.Reader;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SqlHelper
+namespace SqlHelperReader
 {
 	interface ISqlHelperReader
 	{
@@ -21,7 +21,7 @@ namespace SqlHelper
 		/// </summary>
 		/// <param name="newData"></param>
 		/// <returns></returns>
-		SqlHelperReader SetData(object newData);
+		SqlReader SetData(object newData);
 		/// <summary>
 		/// Считать свойство
 		/// </summary>

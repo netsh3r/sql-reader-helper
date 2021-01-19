@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SqlHelper.Interfaces
+namespace SqlHelperReader.Interfaces
 {
 	interface ISqlHelper
 	{
@@ -21,6 +21,6 @@ namespace SqlHelper.Interfaces
 		/// <typeparam name="T"></typeparam>
 		/// <param name="FieldName"></param>
 		/// <returns></returns>
-		T Read<T>(string FieldName);
+		bool Read<T>(string FieldName,out T param);
 	}
 }

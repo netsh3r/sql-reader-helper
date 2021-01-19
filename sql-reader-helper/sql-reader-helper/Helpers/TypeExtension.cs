@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sql_reader_helper.Helpers
+namespace SqlHelperReader.Helpers
 {
 	internal static class TypeExtension
 	{

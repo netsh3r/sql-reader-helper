@@ -1,21 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SqlHelperReader.Reader;
+using System;
+using System.Data.Common;
 
-namespace sql_reader_helper.Reader
+namespace SqlHelperReader
 {
-	public class SqlReader<T,TProperty>
+	public class SqlReader<T> : SqlReader
 	{
-		private IDictionary<string, object> property;
-		public SqlReader(string propertyName)
+		/// <summary>
+		/// Конструктор для сохранения свойства dataReader
+		/// </summary>
+		/// <param name="DataReader"></param>
+		public SqlReader(DbDataReader DataReader) : base(DataReader)
 		{
-			property.Add(propertyName,default(t));
 		}
-		public SqlReader<T, TProperty> Column(string ColumnName)
+		public SqlReader(DbDataReader DataReader,string ColumnName) : base(DataReader,ColumnName)
 		{
+		}
+		/// <summary>
+		/// Полученное значение
+		/// </summary>
+		public T Value
+		{
+			get
+			{
+				return (T)base.Data;
+			}
+		}
+		public SqlReader<T> Column(string FieldName)
+		{
+			return this;
+		}
+		/// <summary>
+		/// считать запись в зависимости от результата
+		/// </summary>
+		/// <param name="FieldName"></param>
+		/// <returns></returns>
+		public SqlReader<T> Read(string FieldName)
+		{
+			//if(string.IsNullOrEmpty())
+			base.Data = base.Read<T>(FieldName);
+			return this;
+		}
+		/// <summary>
+		/// Выполнить логику чтения данных
+		/// </summary>
+		/// <param name="action"></param>
+		/// <returns></returns>
+		public SqlReader<T> Action(Action<SqlReader<T>> action)
+		{
+			action(this);
 			return this;
 		}
 	}
