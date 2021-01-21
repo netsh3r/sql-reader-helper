@@ -42,20 +42,44 @@ namespace SqlHelperReader.Reader
 			return this;
 		}
 
-		public override T Read<T>(string FieldName)
+		internal void SetData()
+		{
+			base.Data = Read(base.ColumnName);
+		}
+		/// <summary>
+		/// Получить данные из бд
+		/// </summary>
+		/// <param name="FieldName"></param>
+		/// <returns></returns>
+		internal object Read(string FieldName)
 		{
 			int FieldIndex;
-			try { FieldIndex = DataReader.GetOrdinal(FieldName); }
-			catch { return default(T); }
+			try { 
+				FieldIndex = DataReader.GetOrdinal(FieldName);
 
-			if (DataReader.IsDBNull(FieldIndex))
-			{
-				return default(T);
+				if (!DataReader.IsDBNull(FieldIndex))
+				{
+					return DataReader.GetValue(FieldIndex);
+				}
 			}
-			else
+			catch { 
+				return null; 
+			}
+
+			return null;
+		}
+		/// <summary>
+		/// Получить данные из бд определенного типа
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="FieldName"></param>
+		/// <returns></returns>
+		public override T Read<T>(string FieldName)
+		{
+			object readData = Read(FieldName);
+			if(readData != null)
 			{
-				object readData = DataReader.GetValue(FieldIndex);
-				if (readData is T)
+				if(readData is T)
 				{
 					return (T)readData;
 				}
@@ -71,6 +95,8 @@ namespace SqlHelperReader.Reader
 					}
 				}
 			}
+
+			return default(T);
 		}
 	}
 }

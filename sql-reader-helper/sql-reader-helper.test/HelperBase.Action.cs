@@ -1,14 +1,18 @@
 ﻿using Moq;
 using NUnit.Framework;
-using SqlHelperReader;
+using SqlHelperReader.Action;
 using System;
+using System.Collections.Generic;
 using System.Data.Common;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace sql_reader_helper.test
 {
 	[TestFixture]
-	public class HelperBase
-	{
+    public class HelperBaseAction
+    {
 		private Mock<DbDataReader> MockDataReader;
 		[SetUp]
 		public void Init()
@@ -22,32 +26,20 @@ namespace sql_reader_helper.test
 			MockDataReader.Setup(t => t.GetValue(0)).Returns("123");
 		}
 		[Test]
-		public void CreateHelperBase()
+		public void CreateActionHelper()
 		{
-			using(var helper = new SqlHelper(null))
+			using(var helper = new SqlHelper(MockDataReader.Object))
 			{
-				Assert.IsNotNull(helper);
+				helper.Read<string>("C").Action(t =>
+				{
+					t.Data = t.Read();
+				});
 			}
 		}
 		[Test]
-		public void GetColumnValueWithoutType()
+		public void GetColumnValueWithGeneric()
 		{
-			using (var helper = new SqlHelper(MockDataReader.Object))
-			{
-				var c = helper.Read("c");
-				Assert.IsNotNull(c);
-				Assert.IsTrue(c is string);
-			}
-		}
-		[Test]
-		public void GetColumnValueWithType()
-		{
-			using (var helper = new SqlHelper(MockDataReader.Object))
-			{
-				var c = helper.Read<string>("c");
-				Assert.IsNotNull(c);
-				Assert.IsTrue(c is string);
-			}
+
 		}
 	}
 }

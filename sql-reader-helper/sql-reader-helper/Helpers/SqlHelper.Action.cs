@@ -13,19 +13,8 @@ namespace SqlHelperReader.Action
 	/// <summary>
 	/// Помощник чтения данных из бд
 	/// </summary>
-	public class SqlHelper : BaseHelper.SqlHelper
+	public class SqlHelper : SqlHelperBase
 	{
-		private static DbDataReader _dataReader;
-		/// <summary>
-		/// Получить класс хелпер
-		/// </summary>
-		/// <param name="DataReader"></param>
-		/// <returns></returns>
-		public static SqlHelper Create(DbDataReader DataReader)
-		{
-			_dataReader = DataReader;
-			return new SqlHelper(DataReader);
-		}
 		public SqlHelper(DbDataReader dataReader) : base(dataReader) { }
 
 		/// <summary>
@@ -45,7 +34,7 @@ namespace SqlHelperReader.Action
 		/// <returns></returns>
 		public SqlReader<T> Read<T>(string ColumnName)
 		{
-			return new SqlReader<T>(_dataReader, ColumnName);
+			return new SqlReader<T>(base.dataReader, ColumnName);
 		}
 		/// <summary>
 		/// Получить значение свойства

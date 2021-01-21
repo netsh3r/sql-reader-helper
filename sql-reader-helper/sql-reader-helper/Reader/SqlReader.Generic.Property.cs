@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SqlHelperReader.Reader
 {
-	public class SqlReader<T,TProperty>
+	public class SqlReader<T,TProperty> : SqlReader<T>
 	{
-		private IDictionary<string, object> property;
-		public SqlReader(string propertyName)
+		public SqlReader(DbDataReader dataReader, string propertyName) : base(dataReader)
 		{
-			property.Add(propertyName,default(T));
+			base.ColumnName = propertyName;
 		}
-		public SqlReader<T, TProperty> Column(string ColumnName)
+		public new SqlReader<T> Column(string ColumnName)
 		{
-			return this;
+			return base.Column(ColumnName);
 		}
 	}
 }

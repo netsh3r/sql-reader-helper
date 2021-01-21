@@ -9,7 +9,7 @@ namespace SqlHelperReader
 {
 	public class SqlHelperBase : IDisposable
 	{
-		private DbDataReader dataReader;
+		protected DbDataReader dataReader;
 		public SqlHelperBase(DbDataReader dataReader)
 		{
 			this.dataReader = dataReader;

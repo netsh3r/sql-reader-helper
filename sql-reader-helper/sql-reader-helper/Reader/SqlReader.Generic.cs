@@ -15,6 +15,7 @@ namespace SqlHelperReader
 		}
 		public SqlReader(DbDataReader DataReader,string ColumnName) : base(DataReader,ColumnName)
 		{
+			base.Data = base.Read<T>(ColumnName);
 		}
 		/// <summary>
 		/// Полученное значение
@@ -26,8 +27,9 @@ namespace SqlHelperReader
 				return (T)base.Data;
 			}
 		}
-		public SqlReader<T> Column(string FieldName)
+		public SqlReader<T> Column(string ColumnName)
 		{
+			base.ColumnName = ColumnName;
 			return this;
 		}
 		/// <summary>
@@ -35,7 +37,7 @@ namespace SqlHelperReader
 		/// </summary>
 		/// <param name="FieldName"></param>
 		/// <returns></returns>
-		public SqlReader<T> Read(string FieldName)
+		public new SqlReader<T> Read(string FieldName)
 		{
 			//if(string.IsNullOrEmpty())
 			base.Data = base.Read<T>(FieldName);

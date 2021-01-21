@@ -16,15 +16,14 @@ namespace SqlHelperReader
 			this.sqlReader = new SqlReader(dbReader);
 		}
 
-		private string Read(string columnName)
+		public object Read(string columnName)
 		{
-			sqlReader.Read
-			return null;
+			return sqlReader.Read<object>(columnName);
 		}
 
-		private T Read<T>(string columnName)
+		public T Read<T>(string columnName)
 		{
-			return default(T);
+			return sqlReader.Read<T>(columnName);
 		}
 	}
 }

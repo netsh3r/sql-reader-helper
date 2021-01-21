@@ -1,4 +1,5 @@
-﻿using SqlHelperReader.Reader;
+﻿using SqlHelperReader.Helpers;
+using SqlHelperReader.Reader;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -7,31 +8,35 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SqlHelperReader.Helpers
+namespace SqlHelperReader.Generic
 {
-	public sealed class SqlHelper<T> : IDisposable where T: new() 
+	public sealed class SqlHelper<T> : SqlHelperBase where T: new() 
 	{
-		private DbDataReader _dataReader;
+		//private DbDataReader _dataReader;
+		private IDictionary<string,SqlReader> sqlReaderModel;
 		private T _model;
-		public SqlHelper(DbDataReader dataReader)
+		public SqlHelper(DbDataReader dataReader):base(dataReader)
 		{
-			this._dataReader = dataReader;
+			sqlReaderModel = new Dictionary<string, SqlReader>();
 			this._model = new T();
 		}
 		public SqlReader<T, TProperty> Property<TProperty>(Expression<Func<T,TProperty>> expression)
 		{
 			var name = TypeExtension.GetPropertyName(expression);
-			return new SqlReader<T, TProperty>(name);
+			var reader = new SqlReader<T, TProperty>(base.dataReader,name);
+			sqlReaderModel.Add(name,reader);
+			return reader;
 		}
 
 		public T GetValue()
 		{
+			foreach(var read in sqlReaderModel)
+			{
+				var modelType = _model.GetType().GetProperty(read.Key);
+				read.Value.SetData();
+				modelType.SetValue(_model, read.Value.Data);
+			}
 			return _model;
-		}
-
-		public void Dispose()
-		{
-			_dataReader.Close();
 		}
 	}
 }
