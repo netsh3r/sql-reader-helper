@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sql-reader-helper", "sql-reader-helper\sql-reader-helper.csproj", "{8CB15373-84A7-4C5B-9E0F-D0939CFB6553}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sql-reader-helper.test", "sql-reader-helper.test\sql-reader-helper.test.csproj", "{4EB31E5F-6C7B-4E3A-B146-0E8309944290}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8CB15373-84A7-4C5B-9E0F-D0939CFB6553}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CB15373-84A7-4C5B-9E0F-D0939CFB6553}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CB15373-84A7-4C5B-9E0F-D0939CFB6553}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CB15373-84A7-4C5B-9E0F-D0939CFB6553}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EB31E5F-6C7B-4E3A-B146-0E8309944290}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EB31E5F-6C7B-4E3A-B146-0E8309944290}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EB31E5F-6C7B-4E3A-B146-0E8309944290}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EB31E5F-6C7B-4E3A-B146-0E8309944290}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5C68FFE6-D1AE-4B8F-9B7F-91E7B87930B1}
+	EndGlobalSection
+EndGlobal
