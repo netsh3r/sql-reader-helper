@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace SqlHelperReader.Reader
 {
-	public class SqlReader<T,TProperty> : SqlReader<T>
+	public class SqlReader<T,TProperty> : SqlReader<TProperty>
 	{
 		public SqlReader(DbDataReader dataReader, string propertyName) : base(dataReader)
 		{
 			base.ColumnName = propertyName;
 		}
-		public new SqlReader<T> Column(string ColumnName)
+		public new SqlReader<TProperty> Column(string ColumnName)
 		{
-			return base.Column(ColumnName);
+			return this;
 		}
 	}
 }

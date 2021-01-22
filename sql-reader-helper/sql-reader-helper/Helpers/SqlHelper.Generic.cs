@@ -28,6 +28,20 @@ namespace SqlHelperReader.Generic
 			return reader;
 		}
 
+		public SqlReader<T, TProperty> Property<TProperty>(string propertyName)
+		{
+			var reader = new SqlReader<T, TProperty>(base.dataReader, propertyName);
+			sqlReaderModel.Add(propertyName, reader);
+			return reader;
+		}
+
+		public SqlReader<T, TProperty> Property<TProperty>(TProperty property, string propertyName)
+		{
+			var reader = new SqlReader<T, TProperty>(base.dataReader, propertyName);
+			sqlReaderModel.Add(propertyName, reader);
+			return reader;
+		}
+
 		public T GetValue()
 		{
 			foreach(var read in sqlReaderModel)

@@ -13,6 +13,9 @@ namespace SqlHelperReader
 		public SqlReader(DbDataReader DataReader) : base(DataReader)
 		{
 		}
+		public SqlReader(DbDataReader DataReader, T tProperty) : base(DataReader)
+		{
+		}
 		public SqlReader(DbDataReader DataReader,string ColumnName) : base(DataReader,ColumnName)
 		{
 			base.Data = base.Read<T>(ColumnName);
@@ -53,5 +56,7 @@ namespace SqlHelperReader
 			action(this);
 			return this;
 		}
+
+
 	}
 }
