@@ -21,7 +21,7 @@ namespace SqlHelperReader.Generic
 			this._model = new T();
 		}
 		public SqlReader<T, TProperty> Property<TProperty>(Expression<Func<T,TProperty>> expression)
-		{
+		{ 
 			var name = TypeExtension.GetPropertyName(expression);
 			var reader = new SqlReader<T, TProperty>(base.dataReader,name);
 			sqlReaderModel.Add(name,reader);

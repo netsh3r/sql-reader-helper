@@ -13,6 +13,7 @@ namespace SqlHelperReader
 	/// </summary>
 	public abstract class SqlReaderBase : ISqlHelperReaderBase
 	{
+		public IDictionary<string, object> DictionaryReader;
 		public DbDataReader DataReader { get; set; }
 		public string ColumnName { get; set; }
 		public SqlReaderBase(DbDataReader DataReader)
@@ -24,6 +25,10 @@ namespace SqlHelperReader
 			this.DataReader = DataReader;
 			this.ColumnName = ColumnName;
 		}
+		public SqlReaderBase(IDictionary<string, object> dictionaryReader)
+		{
+			this.DictionaryReader = dictionaryReader;
+		}
 		/// <summary>
 		/// Получить значение sql определенного типа
 		/// </summary>
@@ -31,6 +36,12 @@ namespace SqlHelperReader
 		/// <param name="FieldName"></param>
 		/// <returns></returns>
 		public abstract T Read<T>(string FieldName);
+		/// <summary>
+		/// Получить значение через Action
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <returns></returns>
+		public abstract SqlReader<T> Read<T>();
 		/// <summary>
 		/// Полученный результат чтения записи
 		/// </summary>

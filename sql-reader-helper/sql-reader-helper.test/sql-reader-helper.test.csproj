@@ -69,6 +69,8 @@
     <Compile Include="Mocks\Entity\MockUser.cs" />
     <Compile Include="Mocks\MockData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlReaderDictionary.cs" />
+    <Compile Include="TestFieldAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

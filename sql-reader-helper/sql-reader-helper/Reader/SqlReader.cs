@@ -77,6 +77,7 @@ namespace SqlHelperReader.Reader
 		public override T Read<T>(string FieldName)
 		{
 			object readData = Read(FieldName);
+			SetData(readData);
 			if(readData != null)
 			{
 				if(readData is T)
@@ -97,6 +98,11 @@ namespace SqlHelperReader.Reader
 			}
 
 			return default(T);
+		}
+
+		public override SqlReader<T> Read<T>()
+		{
+			return new SqlReader<T>(base.DataReader);
 		}
 	}
 }

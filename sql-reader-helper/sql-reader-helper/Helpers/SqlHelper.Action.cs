@@ -13,52 +13,11 @@ namespace SqlHelperReader.Action
 	/// <summary>
 	/// Помощник чтения данных из бд
 	/// </summary>
-	public class SqlHelper : SqlHelperBase
+	public static class SqlHelperAction
 	{
-		public SqlHelper(DbDataReader dataReader) : base(dataReader) { }
-
-		/// <summary>
-		/// Получить класс для чтения результата
-		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <returns></returns>
-		public SqlReader<T> Read<T>()
+		public static SqlReader<T> Action<T>(this SqlReader<T> reader)
 		{
-			return Read<T>(string.Empty);
-		}
-		/// <summary>
-		/// получить класс для чтения результата
-		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <param name="ColumnName">название колонки</param>
-		/// <returns></returns>
-		public SqlReader<T> Read<T>(string ColumnName)
-		{
-			return new SqlReader<T>(base.dataReader, ColumnName);
-		}
-		/// <summary>
-		/// Получить значение свойства
-		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <param name="ColumnName"></param>
-		/// <param name="param"></param>
-		/// <returns></returns>
-		public bool Read<T>(string ColumnName,out T param)
-		{
-			try
-			{
-				param = Read<T>(ColumnName).Value;
-				if(param != null)
-				{
-					return true;
-				}
-			}
-			catch(Exception ex)
-			{
-				param = default(T);
-				Console.WriteLine(ex.Message);
-			}
-			return false;
+			return reader;
 		}
 	}
 }

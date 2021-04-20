@@ -57,6 +57,9 @@ namespace SqlHelperReader
 			return this;
 		}
 
-
+		public static implicit operator T(SqlReader<T> reader)
+		{
+			return reader.Value;
+		}
 	}
 }

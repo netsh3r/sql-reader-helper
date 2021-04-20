@@ -25,5 +25,10 @@ namespace SqlHelperReader
 		{
 			return sqlReader.Read<T>(columnName);
 		}
+
+		public SqlReader<T> Read<T>()
+		{
+			return sqlReader.Read<T>();
+		}
 	}
 }

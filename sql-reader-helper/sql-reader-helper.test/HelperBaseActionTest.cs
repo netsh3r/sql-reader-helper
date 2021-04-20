@@ -1,6 +1,7 @@
 ﻿using Moq;
 using NUnit.Framework;
 using sql_reader_helper.test.Mocks;
+using SqlHelperReader;
 using SqlHelperReader.Action;
 using System;
 using System.Collections.Generic;
@@ -36,11 +37,45 @@ namespace sql_reader_helper.test
 			using (var helper = new SqlHelper(MockDataReader.Object))
 			{
 				string c = string.Empty;
-				helper.Read<string>("c").Action(t=>
+				helper.Read<string>().Action(t =>
 				{
-					c = t.Value;
+					c = t.Read<string>("c");
 				});
 				Assert.AreEqual(c,"123"); 
+			}
+		}
+		[Test]
+		public void GetColumnWithActionAndWithoutParams()
+		{
+			using (var helper = new SqlHelper(MockDataReader.Object))
+			{
+				string c = helper.Read<string>().Action(t =>
+				{
+					t.Read<string>("c");
+				});
+				Assert.AreEqual(c, "123");
+			}
+		}
+		[Test]
+		public void GetColumnWithActionAsParams()
+		{
+			using (var helper = new SqlHelper(MockDataReader.Object))
+			{
+				Assert.AreEqual((string)helper.Read<string>().Action(t =>
+				{
+					t.Read<string>("c");
+				}), "123");
+			}
+		}
+		[Test]
+		public void GetColumnWithActionWithValue()
+		{
+			using (var helper = new SqlHelper(MockDataReader.Object))
+			{
+				Assert.AreEqual(helper.Read<string>().Action(t =>
+				{
+					t.Read<string>("c");
+				}).Value, "123");
 			}
 		}
 		[Test]
@@ -48,7 +83,7 @@ namespace sql_reader_helper.test
 		{
 			using (var helper = new SqlHelper(MockDataReader.Object))
 			{
-				string c = helper.Read<string>("c").Value;
+				object c = (string)helper.Read<string>("c");
 				Assert.AreEqual(c, "123");
 			}
 		}
@@ -57,8 +92,7 @@ namespace sql_reader_helper.test
 		{
 			using (var helper = new SqlHelper(MockDataReader.Object))
 			{
-				string c;
-				helper.Read<string>("c",out c);
+				string c = helper.Read<string>("c");
 				Assert.AreEqual(c, "123");
 			}
 		}
